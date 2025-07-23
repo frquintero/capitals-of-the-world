@@ -26,7 +26,21 @@ Una aplicación web interactiva para aprender y practicar las capitales de todos
 1. **Selecciona un continente** del menú principal
 2. **Responde 5 preguntas** sobre las capitales de países aleatorios
 3. **Obtén tu puntuación** y revisa el resumen detallado de tus respuestas
+
 4. **Juega de nuevo** o selecciona otro continente
+
+## 🕹️ Tic-Tac-Toe Integrado
+
+¡Además del juego de capitales, esta aplicación incluye un modo Tic-Tac-Toe (Tres en línea) para divertirte y desafiar a la computadora!
+
+- Accede al Tic-Tac-Toe desde el menú principal.
+- Elige entre dos modos:
+  - **Fácil**: La computadora juega de forma aleatoria.
+  - **Minimax**: La computadora juega de forma óptima usando el algoritmo Minimax.
+- Juega contra la computadora y trata de ganar en el clásico tablero de 3x3.
+- Puedes reiniciar la partida o volver al menú en cualquier momento.
+
+Esta función extra es ideal para tomar un descanso y poner a prueba tu lógica.
 
 ## 🛠️ Tecnologías Utilizadas
 
