@@ -31,7 +31,10 @@
                         </ul>
                     </div>
                 </div>
-                <button id="start-game-btn" class="btn primary large">Comenzar a Jugar</button>
+                <div class="button-group">
+                    <button id="start-game-btn" class="btn primary large">Comenzar a Jugar</button>
+                    <button id="tic-tac-toe-btn" class="btn primary large">Jugar Tic-Tac-Toe</button>
+                </div>
             </div>
 
             <!-- Menú de continentes -->
@@ -39,6 +42,17 @@
                 <h2>Selecciona un Continente</h2>
                 <div id="continents-menu" class="continents-grid">
                     <!-- Los continentes se generarán dinámicamente -->
+                </div>
+                <button id="back-to-welcome-btn" class="btn secondary">Volver al Inicio</button>
+            </div>
+
+            <!-- Menú de Tic-Tac-Toe -->
+            <div id="tic-tac-toe-screen" class="screen hidden">
+                <h2>🎮 Tic-Tac-Toe</h2>
+                <div class="game-options">
+                    <button id="easy-mode-btn" class="btn primary">Modo Fácil (vs Computadora)</button>
+                    <button id="minimax-mode-btn" class="btn primary">Modo Minimax (vs Computadora)</button>
+                    <button id="back-to-menu-btn" class="btn secondary">Volver al Menú</button>
                 </div>
             </div>
 
@@ -57,6 +71,10 @@
                     <div id="options-container" class="options-grid">
                         <!-- Las opciones se generarán dinámicamente -->
                     </div>
+                </div>
+                <div class="actions">
+                    <button id="quit-game-btn" class="btn danger">Salir del Juego</button>
+                    <button id="back-to-menu-btn" class="btn secondary">Volver al Menú</button>
                 </div>
             </div>
 

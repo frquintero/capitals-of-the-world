@@ -19,7 +19,6 @@ document.addEventListener('DOMContentLoaded', async function() {
         const response = await fetch('data/countries.json');
         countriesData = await response.json();
         loadGameStats();
-        showScreen('welcome-screen');
         updateWelcomeStats();
         loadAvailableContinents();
         loadContinentsMenu();
@@ -27,6 +26,24 @@ document.addEventListener('DOMContentLoaded', async function() {
         // Agregar event listener para el botón de inicio
         document.getElementById('start-game-btn').addEventListener('click', function() {
             showScreen('menu-screen');
+        });
+
+        // Agregar event listener para el botón de Tic-Tac-Toe
+        document.getElementById('tic-tac-toe-btn').addEventListener('click', function() {
+            showScreen('tic-tac-toe-screen');
+            initializeTicTacToe();
+        });
+
+        // Agregar event listener para volver al menú desde Tic-Tac-Toe
+        document.getElementById('back-to-menu-btn').addEventListener('click', function() {
+            showScreen('menu-screen');
+            resetTicTacToe();
+        });
+
+        // Agregar event listener para salir del juego
+        document.getElementById('quit-game-btn').addEventListener('click', function() {
+            showScreen('welcome-screen');
+            resetTicTacToe();
         });
     } catch (error) {
         console.error('Error cargando los datos:', error);
@@ -309,4 +326,283 @@ function getGameStats() {
         currentScore: score,
         totalQuestions: currentQuestions.length
     };
+}
+
+// Funciones para Tic-Tac-Toe
+let ticTacToeBoard = null;
+let currentPlayer = 'X';
+let gameMode = 'easy';
+let gameActive = false;
+
+function initializeTicTacToe() {
+    // Crear el tablero si no existe
+    if (!document.getElementById('tic-tac-toe-board')) {
+        const board = document.createElement('div');
+        board.id = 'tic-tac-toe-board';
+        board.className = 'tic-tac-toe-board';
+        
+        for (let i = 0; i < 9; i++) {
+            const cell = document.createElement('div');
+            cell.className = 'cell';
+            cell.dataset.index = i;
+            board.appendChild(cell);
+        }
+        
+        document.querySelector('.game-options').appendChild(board);
+        
+        // Agregar botones de acción
+        const actions = document.createElement('div');
+        actions.className = 'game-actions';
+        
+        const restartBtn = document.createElement('button');
+        restartBtn.id = 'restart-game-btn';
+        restartBtn.className = 'btn primary';
+        restartBtn.textContent = 'Reiniciar Juego';
+        actions.appendChild(restartBtn);
+        
+        const status = document.createElement('div');
+        status.id = 'game-status';
+        status.className = 'game-status';
+        actions.appendChild(status);
+        
+        document.querySelector('.game-options').appendChild(actions);
+        
+        // Agregar event listeners
+        document.getElementById('restart-game-btn').addEventListener('click', resetTicTacToe);
+        document.querySelectorAll('.cell').forEach(cell => {
+            cell.addEventListener('click', handleCellClick);
+        });
+    }
+    
+    ticTacToeBoard = Array.from(document.querySelectorAll('.cell'));
+    currentPlayer = 'X';
+    gameActive = true;
+    document.getElementById('game-status').textContent = 'Tu turno (X)';
+    ticTacToeBoard.forEach(cell => {
+        cell.textContent = '';
+        cell.style.backgroundColor = '';
+        cell.classList.remove('highlight');
+    });
+}
+
+function resetTicTacToe() {
+    if (ticTacToeBoard) {
+        ticTacToeBoard.forEach(cell => {
+            cell.textContent = '';
+            cell.style.backgroundColor = '';
+            cell.classList.remove('highlight');
+        });
+        currentPlayer = 'X';
+        gameActive = true;
+        document.getElementById('game-status').textContent = 'Tu turno (X)';
+    }
+}
+
+function handleCellClick(e) {
+    const cell = e.target;
+    if (!gameActive || cell.textContent !== '') return;
+    
+    cell.textContent = currentPlayer;
+    cell.style.backgroundColor = currentPlayer === 'X' ? '#4facfe' : '#f44336';
+    cell.style.color = 'white';
+
+    // Check if player wins or draw
+    if (checkWinBoard(getBoardState(), 'X')) {
+        document.getElementById('game-status').textContent = `¡Ganaste! 🎉`;
+        gameActive = false;
+        return;
+    }
+    if (checkDrawBoard(getBoardState())) {
+        document.getElementById('game-status').textContent = `Empate 😊`;
+        gameActive = false;
+        return;
+    }
+
+    currentPlayer = 'O';
+    document.getElementById('game-status').textContent = 'Turno de la computadora (O)';
+
+    setTimeout(() => {
+        let move;
+        if (gameMode === 'minimax') {
+            move = getBestMoveAI();
+            if (move !== undefined) {
+                ticTacToeBoard[move].textContent = 'O';
+                ticTacToeBoard[move].style.backgroundColor = '#f44336';
+                ticTacToeBoard[move].style.color = 'white';
+            }
+        } else {
+            move = makeComputerMoveEasy();
+        }
+
+        if (checkWinBoard(getBoardState(), 'O')) {
+            document.getElementById('game-status').textContent = `La computadora gana 😕`;
+            gameActive = false;
+        } else if (checkDrawBoard(getBoardState())) {
+            document.getElementById('game-status').textContent = `Empate 😊`;
+            gameActive = false;
+        } else {
+            currentPlayer = 'X';
+            document.getElementById('game-status').textContent = 'Tu turno (X)';
+        }
+    }, 500);
+}
+
+function makeComputerMove() {
+    // Deprecated: replaced by makeComputerMoveEasy
+}
+
+function checkWinDOM() {
+    // Deprecated: replaced by checkWinBoard
+}
+
+function checkDrawDOM() {
+    // Deprecated: replaced by checkDrawBoard
+}
+
+function checkWinMinimax(board) {
+    const winPatterns = [
+        [0,1,2], [3,4,5], [6,7,8], // Filas
+        [0,3,6], [1,4,7], [2,5,8], // Columnas
+        [0,4,8], [2,4,6] // Diagonales
+    ];
+    
+    return winPatterns.some(pattern => {
+        const [a, b, c] = pattern;
+        return (
+            board[a] === currentPlayer &&
+            board[b] === currentPlayer &&
+            board[c] === currentPlayer
+        );
+    });
+}
+
+function checkDrawMinimax(board) {
+    return board.every(cell => cell !== '') && !checkWinMinimax(board);
+}
+
+function getBestMove() {
+    // Deprecated: replaced by getBestMoveAI
+}
+
+function minimax(board, depth, isMaximizing) {
+    // Deprecated: replaced by minimaxAI
+}
+
+function checkWin(board) {
+    // Deprecated: replaced by checkWinBoard
+}
+
+function checkDraw(board) {
+    // Deprecated: replaced by checkDrawBoard
+}
+
+// Event listeners para botones de Tic-Tac-Toe
+document.getElementById('easy-mode-btn').addEventListener('click', function() {
+    gameMode = 'easy';
+    document.getElementById('easy-mode-btn').classList.add('selected');
+    document.getElementById('minimax-mode-btn').classList.remove('selected');
+    startTicTacToe();
+});
+
+document.getElementById('minimax-mode-btn').addEventListener('click', function() {
+    gameMode = 'minimax';
+    document.getElementById('minimax-mode-btn').classList.add('selected');
+    document.getElementById('easy-mode-btn').classList.remove('selected');
+    startTicTacToe();
+});
+
+function startTicTacToe() {
+    showScreen('tic-tac-toe-screen');
+    initializeTicTacToe();
+    document.getElementById('game-status').textContent = 'Selecciona una celda para comenzar';
+}
+
+// --- Tic-Tac-Toe Helper Functions ---
+function getBoardState() {
+    return ticTacToeBoard.map(cell => cell.textContent);
+}
+
+function checkWinBoard(board, player) {
+    const winPatterns = [
+        [0,1,2], [3,4,5], [6,7,8],
+        [0,3,6], [1,4,7], [2,5,8],
+        [0,4,8], [2,4,6]
+    ];
+    return winPatterns.some(pattern => {
+        const [a, b, c] = pattern;
+        return (
+            board[a] === player &&
+            board[b] === player &&
+            board[c] === player
+        );
+    });
+}
+
+function checkDrawBoard(board) {
+    return board.every(cell => cell !== '') && !checkWinBoard(board, 'X') && !checkWinBoard(board, 'O');
+}
+
+function makeComputerMoveEasy() {
+    const board = getBoardState();
+    const emptyCells = board
+        .map((value, index) => value === '' ? index : null)
+        .filter(val => val !== null);
+    if (emptyCells.length === 0) return;
+    const randomIndex = emptyCells[Math.floor(Math.random() * emptyCells.length)];
+    ticTacToeBoard[randomIndex].textContent = 'O';
+    ticTacToeBoard[randomIndex].style.backgroundColor = '#f44336';
+    ticTacToeBoard[randomIndex].style.color = 'white';
+    return randomIndex;
+}
+
+function getBestMoveAI() {
+    const board = getBoardState();
+    let bestScore = -Infinity;
+    let move;
+    const emptyCells = board
+        .map((value, index) => value === '' ? index : null)
+        .filter(val => val !== null);
+    for (let i = 0; i < emptyCells.length; i++) {
+        const index = emptyCells[i];
+        board[index] = 'O';
+        const score = minimaxAI(board, 0, false);
+        board[index] = '';
+        if (score > bestScore) {
+            bestScore = score;
+            move = index;
+        }
+    }
+    return move;
+}
+
+function minimaxAI(board, depth, isMaximizing) {
+    if (checkWinBoard(board, 'O')) return 10 - depth;
+    if (checkWinBoard(board, 'X')) return -10 + depth;
+    if (checkDrawBoard(board)) return 0;
+
+    const emptyCells = board
+        .map((value, index) => value === '' ? index : null)
+        .filter(val => val !== null);
+
+    if (isMaximizing) {
+        let bestScore = -Infinity;
+        for (let i = 0; i < emptyCells.length; i++) {
+            const index = emptyCells[i];
+            board[index] = 'O';
+            const score = minimaxAI(board, depth + 1, false);
+            board[index] = '';
+            bestScore = Math.max(score, bestScore);
+        }
+        return bestScore;
+    } else {
+        let bestScore = Infinity;
+        for (let i = 0; i < emptyCells.length; i++) {
+            const index = emptyCells[i];
+            board[index] = 'X';
+            const score = minimaxAI(board, depth + 1, true);
+            board[index] = '';
+            bestScore = Math.min(score, bestScore);
+        }
+        return bestScore;
+    }
 }
