@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Capitales del Mundo - Juego Educativo</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🌍 Capitales del Mundo</h1>
+            <p>Aprende y practica las capitales de todos los países</p>
+        </header>
+
+        <main id="game-container">
+            <!-- Pantalla de bienvenida -->
+            <div id="welcome-screen" class="screen">
+                <h2>¡Bienvenido al Juego de Capitales!</h2>
+                <div class="welcome-stats">
+                    <div class="stat-card">
+                        <h3>📊 Estadísticas</h3>
+                        <p>Juegos jugados: <span id="total-games">0</span></p>
+                        <p>Aciertos totales: <span id="total-correct">0</span></p>
+                        <p>Continentes explorados: <span id="continents-played">0</span></p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>🌍 Continentes Disponibles</h3>
+                        <ul id="available-continents">
+                            <!-- Se generarán dinámicamente -->
+                        </ul>
+                    </div>
+                </div>
+                <button id="start-game-btn" class="btn primary large">Comenzar a Jugar</button>
+            </div>
+
+            <!-- Menú de continentes -->
+            <div id="menu-screen" class="screen hidden">
+                <h2>Selecciona un Continente</h2>
+                <div id="continents-menu" class="continents-grid">
+                    <!-- Los continentes se generarán dinámicamente -->
+                </div>
+            </div>
+
+            <!-- Pantalla de juego -->
+            <div id="game-screen" class="screen hidden">
+                <div class="game-header">
+                    <h2 id="continent-title">Europa</h2>
+                    <div class="progress-bar">
+                        <div id="progress-fill" class="progress-fill"></div>
+                    </div>
+                    <span id="question-counter">1/5</span>
+                </div>
+                
+                <div class="question-container">
+                    <h3 id="country-question">¿Cuál es la capital de España?</h3>
+                    <div id="options-container" class="options-grid">
+                        <!-- Las opciones se generarán dinámicamente -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pantalla de resultados -->
+            <div id="results-screen" class="screen hidden">
+                <h2>Resultados</h2>
+                <div class="results-summary">
+                    <p>Preguntas correctas: <span id="correct-count">0</span>/5</p>
+                    <p>Porcentaje: <span id="percentage">0</span>%</p>
+                </div>
+                
+                <div id="detailed-results" class="detailed-results">
+                    <h3>Resumen Completo:</h3>
+                    <ul id="all-answers-list">
+                        <!-- Se mostrarán todas las respuestas -->
+                    </ul>
+                </div>
+                
+                <div id="incorrect-answers" class="incorrect-answers">
+                    <h3>Respuestas Incorrectas:</h3>
+                    <ul id="incorrect-list">
+                        <!-- Se mostrarán las respuestas incorrectas -->
+                    </ul>
+                </div>
+
+                <div class="actions">
+                    <button id="play-again-btn" class="btn primary">Jugar de Nuevo</button>
+                    <button id="back-to-menu-btn" class="btn secondary">Volver al Menú</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
