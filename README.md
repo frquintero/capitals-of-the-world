@@ -2,15 +2,29 @@
 
 Una aplicación web interactiva para aprender y practicar las capitales de todos los países del mundo.
 
-## 🎯 Características
+## 🎯 Características Principales
 
-- **Aprendizaje por continentes**: Selecciona entre 6 continentes diferentes
-- **Preguntas aleatorias**: 5 preguntas por sesión con países diferentes
-- **Sistema de puntuación**: Resultados detallados con porcentaje de aciertos
-- **Resumen detallado**: Al final de cada partida, se muestra un resumen completo con las preguntas realizadas, marcando tus aciertos y errores.
-- **Persistencia de datos**: Guarda estadísticas del juego usando localStorage
-- **Diseño responsivo**: Compatible con dispositivos móviles y desktop
-- **Datos actualizados**: Base de datos confiable con países y capitales
+La aplicación cuenta con dos modos de juego y una variedad de funcionalidades para una experiencia completa:
+
+### Juego de Capitales
+
+- **Pantalla de Bienvenida Interactiva**: Te recibe con un resumen de tus estadísticas globales (partidas jugadas, aciertos totales, continentes explorados).
+- **Aprendizaje por Continentes**: Elige entre 6 continentes para enfocar tu conocimiento.
+- **Partidas de 5 Preguntas Aleatorias**: Cada sesión presenta 5 preguntas únicas para una experiencia dinámica.
+- **Opciones Múltiples Inteligentes**: Cada pregunta ofrece 3 opciones de respuesta, incluyendo la capital correcta y alternativas relevantes.
+- **Feedback Visual e Instantáneo**: Las respuestas se marcan al instante como correctas (verde) o incorrectas (rojo).
+- **Indicador de Progreso**: Sigue tu avance en la partida con una barra de progreso visual.
+- **Resultados Detallados**: Al finalizar, revisa tu puntuación, porcentaje de aciertos y un resumen completo de cada pregunta.
+- **Persistencia de Datos**: Tus estadísticas se guardan en el navegador (`localStorage`) para seguir tu progreso a largo plazo.
+- **Opción de Jugar de Nuevo**: Reinicia la partida en el mismo continente para mejorar tu puntuación.
+
+### Juego de Tic-Tac-Toe
+
+- **Doble Modo de Dificultad**:
+  - **Modo Fácil**: La computadora realiza movimientos aleatorios, ideal para principiantes.
+  - **Modo Minimax**: La computadora utiliza el algoritmo Minimax para jugar de forma óptima, ofreciendo un verdadero desafío.
+- **Interfaz Clásica e Interactiva**: Disfruta del tradicional juego de 3x3 con controles sencillos.
+- **Controles de Juego**: Reinicia la partida o vuelve al menú principal en cualquier momento.
 
 ## 🌎 Continentes Disponibles
 
@@ -23,24 +37,11 @@ Una aplicación web interactiva para aprender y practicar las capitales de todos
 
 ## 🎮 Cómo Jugar
 
-1. **Selecciona un continente** del menú principal
-2. **Responde 5 preguntas** sobre las capitales de países aleatorios
-3. **Obtén tu puntuación** y revisa el resumen detallado de tus respuestas
-
-4. **Juega de nuevo** o selecciona otro continente
-
-## 🕹️ Tic-Tac-Toe Integrado
-
-¡Además del juego de capitales, esta aplicación incluye un modo Tic-Tac-Toe (Tres en línea) para divertirte y desafiar a la computadora!
-
-- Accede al Tic-Tac-Toe desde el menú principal.
-- Elige entre dos modos:
-  - **Fácil**: La computadora juega de forma aleatoria.
-  - **Minimax**: La computadora juega de forma óptima usando el algoritmo Minimax.
-- Juega contra la computadora y trata de ganar en el clásico tablero de 3x3.
-- Puedes reiniciar la partida o volver al menú en cualquier momento.
-
-Esta función extra es ideal para tomar un descanso y poner a prueba tu lógica.
+1. **Inicia la aplicación**: Abre `index.html` en tu navegador.
+2. **Elige un modo de juego** desde la pantalla de bienvenida: "Comenzar a Jugar" (Capitales) o "Jugar Tic-Tac-Toe".
+3. **Si eliges Capitales**: Selecciona un continente, responde las 5 preguntas y revisa tus resultados.
+4. **Si eliges Tic-Tac-Toe**: Selecciona un modo de dificultad y desafía a la computadora.
+5. **Navega fácilmente**: Usa los botones para jugar de nuevo, cambiar de continente o volver al menú principal.
 
 ## 🛠️ Tecnologías Utilizadas
 
@@ -53,6 +54,7 @@ Esta función extra es ideal para tomar un descanso y poner a prueba tu lógica.
 ## 📊 Estadísticas del Juego
 
 La aplicación guarda automáticamente:
+
 - Número total de juegos jugados
 - Preguntas respondidas correctamente
 - Continentes explorados
@@ -65,7 +67,7 @@ La aplicación guarda automáticamente:
 
 ## 📁 Estructura del Proyecto
 
-```
+```text
 capitals-of-the-world/
 ├── index.html          # Página principal
 ├── styles.css          # Estilos CSS
