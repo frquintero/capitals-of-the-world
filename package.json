@@ -1,0 +1,20 @@
+{
+  "name": "capitals-of-the-world",
+  "version": "1.0.0",
+  "description": "Una aplicación web interactiva para aprender y practicar las capitales de todos los países del mundo.",
+  "main": "script.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "jest": "^30.0.5",
+    "jest-environment-jsdom": "^30.0.5"
+  },
+  "jest": {
+    "testEnvironment": "jsdom"
+  }
+}
