@@ -31,7 +31,7 @@ La aplicación cuenta con dos modos de juego y una variedad de funcionalidades p
 - 🇪🇺 Europa (20 países)
 - 🇺🇸 América del Norte (18 países)
 - 🇧🇷 América del Sur (13 países)
-- 🇨🇳 Asia (20 países)
+- 🇨🇳 Asia (21 países)
 - 🇰🇪 África (20 países)
 - 🇦🇺 Oceanía (15 países)
 
