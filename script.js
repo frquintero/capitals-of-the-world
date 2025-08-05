@@ -309,14 +309,22 @@ function showResults() {
 }
 
 // Event listeners para botones
-document.getElementById('play-again-btn').addEventListener('click', function() {
-    startGame(currentContinent);
-});
+if (typeof document !== 'undefined') {
+    const playAgainBtn = document.getElementById('play-again-btn');
+    if (playAgainBtn) {
+        playAgainBtn.addEventListener('click', function() {
+            startGame(currentContinent);
+        });
+    }
 
-document.getElementById('back-to-menu-btn').addEventListener('click', function() {
-    updateWelcomeStats();
-    showScreen('menu-screen');
-});
+    const backToMenuBtn = document.getElementById('back-to-menu-btn');
+    if (backToMenuBtn) {
+        backToMenuBtn.addEventListener('click', function() {
+            updateWelcomeStats();
+            showScreen('menu-screen');
+        });
+    }
+}
 
 // Función para obtener estadísticas (opcional)
 function getGameStats() {
@@ -497,19 +505,27 @@ function checkDraw(board) {
 }
 
 // Event listeners para botones de Tic-Tac-Toe
-document.getElementById('easy-mode-btn').addEventListener('click', function() {
-    gameMode = 'easy';
-    document.getElementById('easy-mode-btn').classList.add('selected');
-    document.getElementById('minimax-mode-btn').classList.remove('selected');
-    startTicTacToe();
-});
+if (typeof document !== 'undefined') {
+    const easyModeBtn = document.getElementById('easy-mode-btn');
+    if (easyModeBtn) {
+        easyModeBtn.addEventListener('click', function() {
+            gameMode = 'easy';
+            document.getElementById('easy-mode-btn').classList.add('selected');
+            document.getElementById('minimax-mode-btn').classList.remove('selected');
+            startTicTacToe();
+        });
+    }
 
-document.getElementById('minimax-mode-btn').addEventListener('click', function() {
-    gameMode = 'minimax';
-    document.getElementById('minimax-mode-btn').classList.add('selected');
-    document.getElementById('easy-mode-btn').classList.remove('selected');
-    startTicTacToe();
-});
+    const minimaxModeBtn = document.getElementById('minimax-mode-btn');
+    if (minimaxModeBtn) {
+        minimaxModeBtn.addEventListener('click', function() {
+            gameMode = 'minimax';
+            document.getElementById('minimax-mode-btn').classList.add('selected');
+            document.getElementById('easy-mode-btn').classList.remove('selected');
+            startTicTacToe();
+        });
+    }
+}
 
 function startTicTacToe() {
     showScreen('tic-tac-toe-screen');
@@ -605,4 +621,9 @@ function minimaxAI(board, depth, isMaximizing) {
         }
         return bestScore;
     }
+}
+
+// Export functions for testing in Node.js environment
+if (typeof module !== 'undefined') {
+    module.exports = { checkWinBoard, checkDrawBoard };
 }
